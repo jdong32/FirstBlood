@@ -17,7 +17,7 @@
 
 	<target name="compile">
 		<mkdir dir="${classes.dir}"/>
-		<javac srcdir="${src.dir}" destdir="${classes.dir}" encoding="gbk" classpathref="classpath"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" encoding="utf-8" classpathref="classpath"/>
 	</target>
 
 	<target name="jar">
