@@ -26,7 +26,7 @@ public class Step1Phase2 {
 	}
 	
 	private void process(FirstClass[] inputs, String path) {
-		File destFile = new File(path + "³õ²½ÎÄ¼ş.xls");
+		File destFile = new File(path + "åˆæ­¥æ–‡ä»¶.xls");
 		try {
 				if (!destFile.exists()) {
 				destFile.createNewFile();

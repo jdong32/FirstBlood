@@ -42,34 +42,34 @@ public myWindow() {
 	    JLabel label = new JLabel(background);
 	    label.setBounds(0, 0, background.getIconWidth(), background.getIconHeight());
 	    
-        p = new JPanel(); // ½¨Á¢Ò»¸öÃæ°å
-        this.getContentPane().add(p);// °ÑÃæ°åÌí¼Óµ½¿ò¼Ü
+        p = new JPanel(); // å»ºç«‹ä¸€ä¸ªé¢æ¿
+        this.getContentPane().add(p);// æŠŠé¢æ¿æ·»åŠ åˆ°æ¡†æ¶
         p.add(label);
-        Font myFont=new Font("¿¬Ìå",Font.BOLD,18);
-        Font myFont1=new Font("¿¬Ìå",Font.BOLD,16);
+        Font myFont=new Font("æ¥·ä½“",Font.BOLD,18);
+        Font myFont1=new Font("æ¥·ä½“",Font.BOLD,16);
         //label1.setOpaque(false);
-        label1 = new JLabel("Í¬Ãû»§Í³¼ÆÈí¼ş",JLabel.CENTER);
+        label1 = new JLabel("åŒåæˆ·ç»Ÿè®¡è½¯ä»¶",JLabel.CENTER);
         label1.setFont(myFont);
-        p.add(label1); //Ìí¼Ó¿Õ°×ÎÄ±¾¿ò   
+        p.add(label1); //æ·»åŠ ç©ºç™½æ–‡æœ¬æ¡†   
         label1 = new JLabel("                                                               ");
-        p.add(label1); //Ìí¼Ó¿Õ°×ÎÄ±¾¿ò   
+        p.add(label1); //æ·»åŠ ç©ºç™½æ–‡æœ¬æ¡†   
         textfield = new JTextField(15);
         textfield.setFont(myFont1);
-        p.add(textfield); // °ÑÒ»¸öÎÄ±¾¿òÌí¼Óµ½Ãæ°å
-        Select = new JButton("ä¯ÀÀ");
+        p.add(textfield); // æŠŠä¸€ä¸ªæ–‡æœ¬æ¡†æ·»åŠ åˆ°é¢æ¿
+        Select = new JButton("æµè§ˆ");
         Select.setFont(myFont);
-        p.add(Select); // °ÑÒ»¸öä¯ÀÀ°´Å¥Ìí¼Óµ½Ãæ°å
+        p.add(Select); // æŠŠä¸€ä¸ªæµè§ˆæŒ‰é’®æ·»åŠ åˆ°é¢æ¿
         Select.addActionListener(this);        
         label2 = new JLabel("                                                                ");
         p.add(label2);             
-        button1 = new JButton("Éú³É³õ²½ExcelÎÄ¼ş");
+        button1 = new JButton("ç”Ÿæˆåˆæ­¥Excelæ–‡ä»¶");
         button1.setFont(myFont);
         
         p.add(button1);        
         button1.addActionListener(this);        
         label3 = new JLabel("                                                                ");
         p.add(label3);         
-        button2 = new JButton("Éú³É×îÖÕExcelÎÄ¼ş");
+        button2 = new JButton("ç”Ÿæˆæœ€ç»ˆExcelæ–‡ä»¶");
         button2.setFont(myFont);
         p.add(button2);
         button2.addActionListener(this);  
@@ -77,7 +77,7 @@ public myWindow() {
 
 public void actionPerformed(ActionEvent e) {
 	
-        // µ±°´ÏÂä¯ÀÀ°´Å¥£¬´ò¿ªÒ»¸öÎÄ¼şÑ¡Ôñ£¬ÎÄ±¾¿òÏÔÊ¾ÎÄ¼şÂ·¾¶
+        // å½“æŒ‰ä¸‹æµè§ˆæŒ‰é’®ï¼Œæ‰“å¼€ä¸€ä¸ªæ–‡ä»¶é€‰æ‹©ï¼Œæ–‡æœ¬æ¡†æ˜¾ç¤ºæ–‡ä»¶è·¯å¾„
 	    
         if (e.getSource() == Select) {        	
             int intRetVal = fc.showOpenDialog(this);            
@@ -88,10 +88,10 @@ public void actionPerformed(ActionEvent e) {
             	txtDirPath = txtFilePath.replaceAll(txtFileName, "");
             	try {
 	                String encoding="GBK";
-	                File file=new File(txtDirPath + "¹Ø¼ü×Ö.txt");
-	                if(file.isFile() && file.exists()){           //ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+	                File file=new File(txtDirPath + "å…³é”®å­—.txt");
+	                if(file.isFile() && file.exists()){           //åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	                    InputStreamReader read = new InputStreamReader(
-	                    new FileInputStream(file),encoding);         //¿¼ÂÇµ½±àÂë¸ñÊ½
+	                    new FileInputStream(file),encoding);         //è€ƒè™‘åˆ°ç¼–ç æ ¼å¼
 	                    BufferedReader bufferedReader = new BufferedReader(read);
 	                    String lineTxt = null;
 	                    int num = 0;
@@ -108,14 +108,14 @@ public void actionPerformed(ActionEvent e) {
 	                    System.out.println(inforout[0]);
 	                    System.out.println(inforout[1]);	                  
 	        }else{
-	            System.out.println("ÕÒ²»µ½Ö¸¶¨ÅäÖÃÎÄ¼ş£¡");
-	            JOptionPane.showMessageDialog(null, "ÕÒ²»µ½Ö¸¶¨ÅäÖÃÎÄ¼ş£¡",
-	          			"ÌáÊ¾",JOptionPane.INFORMATION_MESSAGE);  
+	            System.out.println("æ‰¾ä¸åˆ°æŒ‡å®šé…ç½®æ–‡ä»¶ï¼");
+	            JOptionPane.showMessageDialog(null, "æ‰¾ä¸åˆ°æŒ‡å®šé…ç½®æ–‡ä»¶ï¼",
+	          			"æç¤º",JOptionPane.INFORMATION_MESSAGE);  
 	        }
 	        } catch (Exception ee) {
-	            System.out.println("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í£¡");
-	            JOptionPane.showMessageDialog(null, "¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í£¡",
-	          			"ÌáÊ¾",JOptionPane.INFORMATION_MESSAGE);  
+	            System.out.println("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™ï¼");
+	            JOptionPane.showMessageDialog(null, "è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™ï¼",
+	          			"æç¤º",JOptionPane.INFORMATION_MESSAGE);  
 	            ee.printStackTrace();
 	        }	     
 	      }            
@@ -123,32 +123,32 @@ public void actionPerformed(ActionEvent e) {
         
         if (e.getSource() == button1) { 
             
-        	// µÚÒ»²½
-        	// µ±°´ÏÂ°´Å¥£¬Éú³ÉÒ»¸ö³õ²½µÄExcelÎÄ¼ş
+        	// ç¬¬ä¸€æ­¥
+        	// å½“æŒ‰ä¸‹æŒ‰é’®ï¼Œç”Ÿæˆä¸€ä¸ªåˆæ­¥çš„Excelæ–‡ä»¶
         
         	readTxtFile.Read(txtFilePath,txtDirPath,inforin,inforout);
-        	File destFile = new File(txtDirPath + "³õ²½ÎÄ¼ş.xls");
+        	File destFile = new File(txtDirPath + "åˆæ­¥æ–‡ä»¶.xls");
         	if(destFile.exists()){
-        		JOptionPane.showMessageDialog(null, "³õ²½ExcelÎÄ¼şÒÑÉú³É",
-              			"ÌáÊ¾",JOptionPane.INFORMATION_MESSAGE);  
+        		JOptionPane.showMessageDialog(null, "åˆæ­¥Excelæ–‡ä»¶å·²ç”Ÿæˆ",
+              			"æç¤º",JOptionPane.INFORMATION_MESSAGE);  
         	}
    	
         }         
         
         if (e.getSource() == button2) { 
             
-        	// µÚ¶ş²½
-        	// µ±°´ÏÂ°´Å¥£¬Éú³ÉÒ»¸ö×îÖÕµÄExcelÎÄ¼ş
+        	// ç¬¬äºŒæ­¥
+        	// å½“æŒ‰ä¸‹æŒ‰é’®ï¼Œç”Ÿæˆä¸€ä¸ªæœ€ç»ˆçš„Excelæ–‡ä»¶
         	
             String stemp = fc.getSelectedFile().getName();
             String date = stemp.replaceAll("(?<!\\d)\\D", "");
-            String srcPath = txtDirPath + "³õ²½ÎÄ¼ş.xls";
-            String destPath = txtDirPath + "×îÖÕÎÄ¼ş.xls";
+            String srcPath = txtDirPath + "åˆæ­¥æ–‡ä»¶.xls";
+            String destPath = txtDirPath + "æœ€ç»ˆæ–‡ä»¶.xls";
             Step2.zuzhang(srcPath, destPath, date);
-            File destFile2 = new File(txtDirPath + "×îÖÕÎÄ¼ş.xls");
+            File destFile2 = new File(txtDirPath + "æœ€ç»ˆæ–‡ä»¶.xls");
         	if(destFile2.exists()){
-        		JOptionPane.showMessageDialog(null, "×îÖÕExcelÎÄ¼şÒÑÉú³É",
-              			"ÌáÊ¾",JOptionPane.INFORMATION_MESSAGE);  
+        		JOptionPane.showMessageDialog(null, "æœ€ç»ˆExcelæ–‡ä»¶å·²ç”Ÿæˆ",
+              			"æç¤º",JOptionPane.INFORMATION_MESSAGE);  
         	}
         }        
     }
@@ -162,4 +162,5 @@ public static void main(String[] args) {
         frame.setVisible(true);
     }
 }
+
 

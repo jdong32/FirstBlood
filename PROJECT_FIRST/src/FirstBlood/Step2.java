@@ -87,7 +87,7 @@ public class Step2 {
 			}
 			writeNumber(wsheet, endRow, i, sum);
 		}
-		writeLabel(wsheet, endRow++, 0, "合计");
+		writeLabel(wsheet, endRow++, 0, "鍚堣");
 		return sum;
 	}
 	
@@ -156,7 +156,7 @@ public class Step2 {
 				WritableWorkbook wwb = Workbook.createWorkbook(new File(destPath));
 				WritableSheet wsheet = wwb.createSheet("Output", 0);
 				
-				String[] titles = {"机构名称", "小计"};
+				String[] titles = {"鏈烘瀯鍚嶇О", "灏忚"};
 				int i = 0;
 				for (String title : titles) {
 					writeLabel(wsheet, 0, i++, title);

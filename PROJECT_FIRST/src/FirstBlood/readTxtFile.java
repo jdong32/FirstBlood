@@ -30,8 +30,8 @@ public class readTxtFile {
 
                 while((line = br.readLine()) != null){
                     
-                    String outstart = "´ÈÏªÍ¬³ÇÍâ±ÒÍùÕËÁ÷Ë®";
-                    String instart = "´ÈÏªÍ¬³ÇÍâ±ÒÀ´ÕËÁ÷Ë®";
+                    String outstart = "æ…ˆæºªåŒåŸå¤–å¸å¾€è´¦æµæ°´";
+                    String instart = "æ…ˆæºªåŒåŸå¤–å¸æ¥è´¦æµæ°´";
                     String end = "\\d\\s+record\\(s\\)\\sselected";
                     String outentry = "^(\\d+\\s+){4}"
                             + "\\S+\\s+"
