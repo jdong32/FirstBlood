@@ -1,4 +1,4 @@
-package mywindow;
+package FirstBlood;
 
 import java.util.regex.Pattern;
 import java.io.BufferedReader;
@@ -9,21 +9,21 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.*;
 
-public class ReadTxtFile {
+public class readTxtFile {
      public static FirstClass first[] = new FirstClass[40]; 	
      
-     public static void read(String filePath, String in[], String out[]){    
+     public static void read(String filePath, String dirPath, String in[], String out[]){    
     	int num = 0;
         try {
-        	int num = 0;
+        	
             File file=new File(filePath);
             if(file.isFile() && file.exists()){
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), Charset.forName("GBK")));
                 String line;
                 FirstClass first[] = new FirstClass[40];
                 Set<String> limitString = new HashSet<String>();
-                for(int s= 0;s<limit.length;s++){
-                    limitString.add(limit[s]);
+                for(int s= 0;s<in.length;s++){
+                    limitString.add(in[s]);
                 }
                 while((line = br.readLine()) != null){
                     //定义正则表达式
@@ -176,9 +176,9 @@ public class ReadTxtFile {
                     }
                 }
                 System.out.println();System.out.println();System.out.println();
-                for(int y = 0;y < num;y++)
-                    System.out.println(first[y].currtype + " " + first[y].pyrBank + " " + first[y].name1 + " " 
-                                        + first[y].name2 + " " + first[y].pyeBank + " " + first[y].money);
+//                for(int y = 0;y < num;y++)
+//                    System.out.println(first[y].currtype + " " + first[y].pyrBank + " " + first[y].name1 + " " 
+//                                        + first[y].name2 + " " + first[y].pyeBank + " " + first[y].money);
                 //将FirstClass数组写入文件
             }
         }catch(Exception e){            
@@ -189,7 +189,7 @@ public class ReadTxtFile {
       
     public static void Read(String txtPath, String dirPath, String in[], String out[]) {
     	
-	ReadTxtFile.read(txtPath, in, out);    
+	readTxtFile.read(txtPath,dirPath, in, out);    
         Step1Phase2.xiaoyu(first, dirPath);
     }
 
