@@ -10,9 +10,14 @@ import java.util.regex.Matcher;
 import java.util.*;
 
 public class readTxtFile {
-     public static FirstClass first[] = new FirstClass[40]; 	
+     public static FirstClass first[] = new FirstClass[400]; 	
      
-     public static void read(String filePath, String dirPath, String in[], String out[]){    
+     public static void read(String filePath, String dirPath, String in[], String out[]){ 
+    	 for(int i=0; i<400; i++) {
+        	 FirstClass ini = new FirstClass();
+         	first[i] = ini;
+         	
+         }
     	int num = 0;
         try {
         	
@@ -20,7 +25,7 @@ public class readTxtFile {
             if(file.isFile() && file.exists()){
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), Charset.forName("GBK")));
                 String line;
-                FirstClass first[] = new FirstClass[40];
+                 
                 Set<String> limitString = new HashSet<String>();
                 for(int s= 0;s<in.length;s++){
                     limitString.add(in[s]);
@@ -73,8 +78,8 @@ public class readTxtFile {
                             
                             if (outentrym.find()) {//判断为条目
                                 if(limitString.contains(outentrym.group(8).trim())){
-                                    System.out.println(outentrym.group(2).trim() + " " + outentrym.group(4).trim() + " " + outentrym.group(5).trim() + " " 
-                                                + outentrym.group(8).trim() + " " + outentrym.group(9).trim() + " " + outentrym.group(12).trim());
+//                                    System.out.println(outentrym.group(2).trim() + " " + outentrym.group(4).trim() + " " + outentrym.group(5).trim() + " " 
+//                                                + outentrym.group(8).trim() + " " + outentrym.group(9).trim() + " " + outentrym.group(12).trim());
                                     //如果和前面某条记录的name1和name2相等，则累加
                                     boolean IsAdded = false;
                                     if(num != 0){
@@ -129,8 +134,8 @@ public class readTxtFile {
                             inentrym = inentryp.matcher(inline);
                             if(inentrym.find()){
                                 if(limitString.contains(inentrym.group(7).trim())){
-                                    System.out.println(inentrym.group(1).trim() + " " +inentrym.group(3).trim() + " " + inentrym.group(4).trim() + " " 
-                                                + inentrym.group(7).trim() + " " + inentrym.group(8).trim() + " " + inentrym.group(11).trim());
+//                                    System.out.println(inentrym.group(1).trim() + " " +inentrym.group(3).trim() + " " + inentrym.group(4).trim() + " " 
+//                                                + inentrym.group(7).trim() + " " + inentrym.group(8).trim() + " " + inentrym.group(11).trim());
                                     boolean IsAdded = false;
                                     if(num != 0){
                                         //判断是否有可累加的数据
@@ -176,11 +181,23 @@ public class readTxtFile {
                     }
                 }
                 System.out.println();System.out.println();System.out.println();
-//                for(int y = 0;y < num;y++)
-//                    System.out.println(first[y].currtype + " " + first[y].pyrBank + " " + first[y].name1 + " " 
-//                                        + first[y].name2 + " " + first[y].pyeBank + " " + first[y].money);
+                for(int y = 0;y < num;y++)
+                    System.out.println(first[y].currtype + " " + first[y].pyrBank + " " + first[y].name1 + " " 
+                                        + first[y].name2 + " " + first[y].pyeBank + " " + first[y].money);
                 //将FirstClass数组写入文件
             }
+            float ratef = Float.parseFloat(myWindow.rate);
+			float temp;		
+			for (int i = 0; i < 400; i++) {
+				if ((first[i].currtype != null)
+						&& first[i].currtype.equals("38")) {
+					temp = ratef * first[i].money;
+					System.out.println(temp);
+					first[i].money = (long) temp;
+					System.out.println(first[i].money);
+				}
+			}
+
         }catch(Exception e){            
             System.out.println("111");
             System.err.println(e.getMessage());
