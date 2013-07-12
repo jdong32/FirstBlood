@@ -49,10 +49,10 @@ public class myWindow extends JFrame implements ActionListener {
 		Font myFont = new Font("楷体", Font.BOLD, 16);
 		Font myFont1 = new Font("楷体", Font.BOLD, 16);
 
-		label1 = new JLabel("同名户统计软�?);
-		label1.setFont(myFont);
-		label1.setBounds(200, 40, 200, 20);
-		p.add(label1); // 添加空白文本�?
+//		label1 = new JLabel("同名户统计软�?);
+//		label1.setFont(myFont);
+//		label1.setBounds(200, 40, 200, 20);
+//		p.add(label1); // 添加空白文本�?
 
 		label0 = new JLabel("欧元对美元汇�?");
 		label0.setFont(myFont1);
