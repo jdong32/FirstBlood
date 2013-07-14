@@ -40,8 +40,8 @@ public class Step1Phase2 {
 
 		for (int i = 0; i < numRows; i += 1) {
 			Cell[] c = sheet.getRow(i);
-			if (c[0].getContents() == "") {
-				if (c[1].getContents() != "") {
+			if (c[0].getContents().equals("")) {
+				if (!c[1].getContents().equals("")) {
 					br.add(c[1].getContents());
 				} else {
 					continue;
