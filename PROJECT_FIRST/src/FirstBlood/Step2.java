@@ -7,7 +7,7 @@ import java.util.*;
 
 import jxl.*;
 import jxl.write.*;
-import jxl.format.*;
+//import jxl.format.*;
 import jxl.format.Colour;
 import jxl.format.Border;
 import jxl.format.BorderLineStyle;

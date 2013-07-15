@@ -76,7 +76,7 @@ public class Step1Phase2 {
 
 			genDictionary("data/dictsrc.xls");
 			for (FirstClass fc : inputs) {
-				if (fc.name1 == null) {
+				if (fc.name1 == null || fc.money ==0) {
 					continue;
 				} else {
 					//System.out.println(fc.name1 + " : " + lookupDictionary(fc.name2));
