@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.*;
+import mywindow.MyWindow;
 
 public class readTxtFile {
      public static FirstClass first[] = new FirstClass[400]; 	
@@ -19,9 +20,9 @@ public class readTxtFile {
          	
          }
     	int num = 0;
-        try {
-        	
+        try {       	
             File file=new File(filePath);
+            float ratef = Float.parseFloat(MyWindow.rate);
             if(file.isFile() && file.exists()){
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), Charset.forName("GBK")));
                 String line;
@@ -87,7 +88,11 @@ public class readTxtFile {
                                         for(int t=0; t < num;t++){
                                         if(((first[t].name1).equals(outentrym.group(5).trim())) 
                                             && ((first[t].name2).equals(outentrym.group(9).trim()))){
-                                            first[t].money += Long.parseLong(outentrym.group(12).trim());
+                                            if(outentrym.group(2).trim().equals(38)){
+                                                first[t].money += (Long.parseLong(outentrym.group(12).trim())) * ratef;
+                                            }else{   
+                                                first[t].money += Long.parseLong(outentrym.group(12).trim());
+                                            }
                                             IsAdded = true;
                                             break;
                                         }                      
@@ -113,7 +118,11 @@ public class readTxtFile {
                                     for(int t=0; t < num;t++){
                                         if(first[t].name1.equals(outentrym.group(9).trim()) 
                                                 && first[t].name2.equals(outentrym.group(5).trim())){
-                                            first[t].money -= (Long.parseLong(outentrym.group(12).trim()));
+                                            if(outentrym.group(2).trim().equals(38)){
+                                                first[t].money -= (Long.parseLong(outentrym.group(12).trim())) * ratef;
+                                            }else{   
+                                                first[t].money -= (Long.parseLong(outentrym.group(12).trim()));
+                                            } 
 //                                            if(first[t].money < 0)
 //                                                first[t].money = 0;
                                         }                                       
@@ -142,7 +151,11 @@ public class readTxtFile {
                                         for(int t=0; t < num;t++){
                                         if(first[t].name1.equals(inentrym.group(4).trim()) 
                                                 && first[t].name2.equals(inentrym.group(8).trim())){
-                                            first[t].money += (Long.parseLong(inentrym.group(11).trim()));
+                                            if(inentrym.group(2).trim().equals(38)){
+                                                first[t].money += (Long.parseLong(inentrym.group(12).trim())) * ratef;
+                                            }else{   
+                                                first[t].money += (Long.parseLong(inentrym.group(11).trim()));
+                                            }
                                             IsAdded = true;
                                             break;
                                         }                      
@@ -164,7 +177,11 @@ public class readTxtFile {
                                     for(int t=0; t < num;t++){
                                         if(first[t].name1.equals(inentrym.group(8).trim()) 
                                                 && first[t].name2.equals(inentrym.group(4).trim())){
-                                            first[t].money -= (Long.parseLong(inentrym.group(11).trim()));
+                                            if(inentrym.group(2).trim().equals(38)){
+                                                first[t].money -= (Long.parseLong(inentrym.group(12).trim())) * ratef;
+                                            }else{   
+                                                first[t].money -= (Long.parseLong(inentrym.group(11).trim()));
+                                            } 
 //                                            if(first[t].money < 0)
 //                                                first[t].money = 0;
                                         }                                       
@@ -192,17 +209,17 @@ public class readTxtFile {
                 }
                 //将FirstClass数组写入文件
             }
-            float ratef = Float.parseFloat(myWindow.rate);
-			float temp;		
-			for (int i = 0; i < 400; i++) {
-				if ((first[i].currtype != null)
-						&& first[i].currtype.equals("38")) {
-					temp = ratef * first[i].money;
-					System.out.println(temp);
-					first[i].money = (long) temp;
-					System.out.println(first[i].money);
-				}
-			}
+//            float ratef = Float.parseFloat(myWindow.rate);
+//			float temp;		
+//			for (int i = 0; i < 400; i++) {
+//				if ((first[i].currtype != null)
+//						&& first[i].currtype.equals("38")) {
+//					temp = ratef * first[i].money;
+//					System.out.println(temp);
+//					first[i].money = (long) temp;
+//					System.out.println(first[i].money);
+//				}
+//			}
 
         }catch(Exception e){            
             System.out.println("111");
