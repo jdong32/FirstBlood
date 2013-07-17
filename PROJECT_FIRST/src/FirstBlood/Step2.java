@@ -335,11 +335,13 @@ public class Step2 {
 	
 	private void mergeBranchXls() throws Exception {
 		WritableWorkbook wwb = Workbook.createWorkbook(new File(destPath));
-		WritableSheet wsheet = wwb.createSheet("Final", 0);
+		WritableSheet wsheet = wwb.createSheet("明细表", 1);
+		WritableSheet bssheet = wwb.createSheet("明细表", 0);
 		Workbook temp;
 
 		int endRow = 0;
 		int endCol = 0;
+		int br_cnt = 0;
 		boolean firstenter = true;
 		
 		Colour color = Colour.IVORY;
@@ -360,17 +362,25 @@ public class Step2 {
 				for (int i = 1; i < endCol; i += 1) {
 					writeLabel(wsheet, 0, i + 2, cells[i].getContents());
 				}
-					
+				
+				{
+					writeLabelWithFormat(bssheet, 0, 0, "支行名称", Colour.WHITE);
+					writeLabelWithFormat(bssheet, 0, 1, "金额汇总", Colour.WHITE);
+				}
+
 				firstenter = false;
 				endRow++;
+				}
 			}
 			//write branch name
 			titlecolor = titlecolor.equals(Colour.CORAL)?Colour.PERIWINKLE:Colour.CORAL;
 			writeLabelWithFormat(wsheet, endRow, 0, " ", titlecolor);
 			writeLabelWithFormat(wsheet, endRow, 1, br, titlecolor);
+			writeLabelWithFormat(bssheet, ++br_cnt, 0, br, Colour.WHITE);
 			//write branch sum
 			Cell c = sheet.getCell(1, br_endRow);
 			writeLabelWithFormat(wsheet, endRow, 2, c.getContents(), titlecolor);
+			writeLabelWithFormat(bssheet, br_cnt, 1, c.getContents(), Colour.WHITE);
 			endRow++;
 			
 			color = color.equals(Colour.IVORY)?Colour.ICE_BLUE: Colour.IVORY;
