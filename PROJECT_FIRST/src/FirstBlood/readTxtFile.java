@@ -12,6 +12,23 @@ import java.util.*;
 public class readTxtFile {
      public static FirstClass first[] = new FirstClass[400]; 	
      
+     public static long JudgeCurr(String curr, long amount){
+        float rate_temp = 0;
+        float rate_Europe = Float.parseFloat(myWindow.rateE);
+        float rate_HK = Float.parseFloat(myWindow.rateH);
+        float rate_Jap = Float.parseFloat(myWindow.rateJ);
+        if(curr.equals("14")){
+            rate_temp = 1;
+        }else if(curr.equals("38")){
+            rate_temp = rate_Europe;
+        }else if(curr.equals("13")){
+            rate_temp = rate_HK;
+        }else if(curr.equals("27")){
+            rate_temp = rate_Jap; 
+        }
+        return (long)(amount * rate_temp);
+    }
+     
      public static void read(String filePath, String dirPath, String in[]){ 
     	 for(int i=0; i<400; i++) {
         	 FirstClass ini = new FirstClass();
@@ -20,9 +37,8 @@ public class readTxtFile {
          }
     	int num = 0;
         try {
-        	float amount = 0;
+        	long amount = 0;
             File file=new File(filePath);
-            float ratef = Float.parseFloat(myWindow.rate);
             if(file.isFile() && file.exists()){
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), Charset.forName("GBK")));
                 String line;
@@ -33,8 +49,8 @@ public class readTxtFile {
                 }
                 while((line = br.readLine()) != null){
                   
-                	String outstart = "=+慈溪同城外币往账流水=+";//往帐数据开始
-                    String instart = "=+慈溪同城外币来账流水=+";//来张数据开始
+                    String outstart = "=+慈溪同城外币往账流水=+";//寰?笎鏁版嵁寮?
+                    String instart = "=+慈溪同城外币来账流水=+";//鏉ュ紶鏁版嵁寮?
                     String end = "\\d\\s+record\\(s\\)\\sselected";
                     String outentry = "^(\\d+\\s+)"
                                 + "(\\d+\\s+)"
@@ -46,7 +62,7 @@ public class readTxtFile {
                                 + "(\\d+\\s)"
                                 + "\\d+\\s+"
                                 + "((\\S+(\\s+\\S+)*)\\s+)"
-                                + "(\\d+)";//amount-12
+                                + "(\\d+)\\d{2}";//amount-12
                     
                     String inentry = "^(\\d+\\s+)"
                                 + "(\\d+\\s+){2}"
@@ -57,7 +73,7 @@ public class readTxtFile {
                                 + "(\\d+\\s+)"
                                 + "\\d+\\s+"
                                 + "((\\S+(\\s+\\S+)*)\\s+)"
-                                + "(\\d+)"; //amount-11
+                                + "(\\d+)\\d{2}"; //amount-11
                     
                    
                     Pattern outp = Pattern.compile(outstart, Pattern.CASE_INSENSITIVE);
@@ -77,17 +93,11 @@ public class readTxtFile {
                             outentrym = outentryp.matcher(outline);
                             
                             if (outentrym.find()) {                       	
-                                if(limitString.contains(outentrym.group(8).trim())){
-                                	if(outentrym.group(2).trim().equals("38")){
-                                		amount = Long.parseLong(outentrym.group(12).trim()) * ratef;
-                                		System.out.println(amount);
-                                	}else{
-                                		amount = Long.parseLong(outentrym.group(12).trim());
-                                	}
-                                 
+                                if(limitString.contains(outentrym.group(8).trim())){                                    
+                                    amount = Long.parseLong(outentrym.group(12).trim());
+                                    amount = JudgeCurr(outentrym.group(2).trim(),amount);                                 
                                     boolean IsAdded = false;
-                                    if(num != 0){
-                                        
+                                    if(num != 0){                                       
                                         for(int t=0; t < num;t++){
                                         if(((first[t].name1).equals(outentrym.group(5).trim())) 
                                             && ((first[t].name2).equals(outentrym.group(9).trim()))){
@@ -111,13 +121,8 @@ public class readTxtFile {
                                     }
                               }
                                 else if(limitString.contains(outentrym.group(4).trim())){
-                                	if(outentrym.group(2).trim().equals("38")){
-                                		amount = Long.parseLong(outentrym.group(12).trim()) * ratef;
-                                		System.out.println(amount);
-                                	}else{
-                                		amount = Long.parseLong(outentrym.group(12).trim());
-                                	}
-                                  
+                                    amount = Long.parseLong(outentrym.group(12).trim());
+                                    amount = JudgeCurr(outentrym.group(2).trim(),amount);                                  
                                     for(int t=0; t < num;t++){
                                         if(first[t].name1.equals(outentrym.group(9).trim()) 
                                                 && first[t].name2.equals(outentrym.group(5).trim())){
@@ -141,16 +146,10 @@ public class readTxtFile {
                             inentrym = inentryp.matcher(inline);
                             if(inentrym.find()){
                                 if(limitString.contains(inentrym.group(7).trim())){
-                                	if(inentrym.group(1).trim().equals("38")){
-                                		amount = Long.parseLong(inentrym.group(11).trim()) * ratef;
-                                		System.out.println(amount);
-                                	}else{
-                                		amount = Long.parseLong(inentrym.group(11).trim());
-                                	}
-
+                                    amount = Long.parseLong(inentrym.group(11).trim());
+                                    amount = JudgeCurr(inentrym.group(1).trim(),amount);
                                     boolean IsAdded = false;
-                                    if(num != 0){
-                                       
+                                    if(num != 0){                                     
                                         for(int t=0; t < num;t++){
                                         if(first[t].name1.equals(inentrym.group(4).trim()) 
                                                 && first[t].name2.equals(inentrym.group(8).trim())){
@@ -172,12 +171,8 @@ public class readTxtFile {
                                         num++;
                                     }
                                 } else if(limitString.contains(inentrym.group(3).trim())){
-                                	if(inentrym.group(1).trim().equals("38")){
-                                		amount = Long.parseLong(inentrym.group(11).trim()) * ratef;
-                                		System.out.println(amount);
-                                	}else{
-                                		amount = Long.parseLong(inentrym.group(11).trim());
-                                	}
+                                    amount = Long.parseLong(inentrym.group(11).trim());
+                                    amount = JudgeCurr(inentrym.group(1).trim(),amount);
                                   
                                     for(int t=0; t < num;t++){
                                         if(first[t].name1.equals(inentrym.group(8).trim()) 
@@ -210,16 +205,16 @@ public class readTxtFile {
        
             }
 //            float ratef = Float.parseFloat(myWindow.rate);
-			float temp;		
-			for (int i = 0; i < 400; i++) {
-				if ((first[i].currtype != null)
-						&& first[i].currtype.equals("38")) {
-					temp = ratef * first[i].money;
-					System.out.println(temp);
-					first[i].money = (long) temp;
-					System.out.println(first[i].money);
-				}
-			}
+//			float temp;		
+//			for (int i = 0; i < 400; i++) {
+//				if ((first[i].currtype != null)
+//						&& first[i].currtype.equals("38")) {
+//					temp = ratef * first[i].money;
+//					System.out.println(temp);
+//					first[i].money = (long) temp;
+//					System.out.println(first[i].money);
+//				}
+//			}
 
         }catch(Exception e){            
       

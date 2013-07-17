@@ -21,9 +21,14 @@ public class myWindow extends JFrame implements ActionListener {
 	public static String txtFilePath;
 	public static String txtDirPath;
 	public static String txtFileName;
-	public static String rate = "1.3060";
+	public static Rate rate;
+    public static String rateE = "1.3060";
+    public static String rateH = "0.1289";
+    public static String rateJ = "0.01006";
+    
+//	public static String rate = "1.3060";
 	public static String inforin[] = new String[5];
-//	public static String inforout[] = new String[5];
+
 	JButton Select;
 	JButton button0;
 	JButton button1;
@@ -35,11 +40,16 @@ public class myWindow extends JFrame implements ActionListener {
 	JLabel label2;
 	JLabel label3;
 	JLabel label4;
+	JLabel label5;
+	JLabel label6;
 	JLabel copyright;
 	JTextField textfield;
-	JTextField ratefield;
+	JTextField ratefield1;
+	JTextField ratefield2;
+	JTextField ratefield3;
 	JPanel p;
 	JPanel maincontainer;
+	JPanel daiXiaoWei;
 	JPanel footer;
 	JFileChooser fc = new JFileChooser();
 	TextArea area;
@@ -49,6 +59,7 @@ public class myWindow extends JFrame implements ActionListener {
 	JPanel backdrop;
 
 	public myWindow() {
+
 		background = new ImageIcon(
 				myWindow.class.getResource("/images/pic.jpg"));
 		JLabel label = new JLabel(background);
@@ -72,39 +83,70 @@ public class myWindow extends JFrame implements ActionListener {
 		maincontainer.setBackground(Color.decode("#CCFF99"));
 		
 		maincontainer.setBorder(BorderFactory.createEtchedBorder());
-		maincontainer.setSize(300, 200);
+		maincontainer.setSize(300, 295);
 		maincontainer.setLocation(20, 90);
 		maincontainer.setLayout(null);
 
+		daiXiaoWei = new JPanel();
+		daiXiaoWei.setBorder(BorderFactory.createEtchedBorder());
+		daiXiaoWei.setBounds(20, 20, 260, 133);
+		daiXiaoWei.setLayout(null);
+		daiXiaoWei.setBackground(Color.decode("#EFEFEF"));
+		
 		label0 = new JLabel("欧元对美元汇率:");
 		label0.setFont(myFont1);
-		label0.setBounds(20, 30, 130, 30);
-		maincontainer.add(label0);
+		label0.setBounds(10, 10, 130, 30);
+		
+		daiXiaoWei.add(label0);
 
-		ratefield = new JTextField(rate);
-		ratefield.setFont(myFont1);
-		ratefield.setSize(80, 30);
-		ratefield.setLocation(130, 30);
-		maincontainer.add(ratefield);
+		ratefield1 = new JTextField(rateE);
+		ratefield1.setFont(myFont1);
+		ratefield1.setSize(60, 30);
+		ratefield1.setLocation(110, 10);
+		daiXiaoWei.add(ratefield1);
+		
+		label5 = new JLabel("港币对美元汇率:");
+		label5.setFont(myFont1);
+		label5.setBounds(10, 50, 130, 30);
+		daiXiaoWei.add(label5);
+
+		ratefield2 = new JTextField(rateH);
+		ratefield2.setFont(myFont1);
+		ratefield2.setSize(60, 30);
+		ratefield2.setLocation(110, 50);
+		daiXiaoWei.add(ratefield2);
+		
+		label6 = new JLabel("日元对美元汇率:");
+		label6.setFont(myFont1);
+		label6.setBounds(10, 90, 130, 30);
+		daiXiaoWei.add(label6);
+
+		ratefield3 = new JTextField(rateJ);
+		ratefield3.setFont(myFont1);
+		ratefield3.setSize(60, 30);
+		ratefield3.setLocation(110, 90);
+		daiXiaoWei.add(ratefield3);
 
 		button0 = new JButton("确定");
 		button0.setBackground(Color.WHITE);
 		button0.setFont(myFont);
 		button0.setSize(70, 30);
-		button0.setLocation(220, 30);
-		maincontainer.add(button0);
+		button0.setLocation(180, 90);
+		daiXiaoWei.add(button0);
 		button0.addActionListener(this);
-
+		
+		maincontainer.add(daiXiaoWei);
 		textfield = new JTextField(24);
 		textfield.setFont(myFont1);
-		textfield.setBounds(20, 70, 190, 30);
+		textfield.setBounds(20, 165, 180, 30);
 		maincontainer.add(textfield);
 
 		Select = new JButton("浏览");
 		Select.setBackground(Color.WHITE);
 		Select.setFont(myFont);
 		Select.setSize(70, 30);
-		Select.setLocation(220, 70);
+//		Select.setLocation(220, 130);
+		Select.setLocation(210, 165);
 		maincontainer.add(Select);
 		Select.addActionListener(this);
 
@@ -112,7 +154,7 @@ public class myWindow extends JFrame implements ActionListener {
 		button1.setBackground(Color.WHITE);
 		button1.setFont(myFont);
 		button1.setSize(265, 30);
-		button1.setLocation(20, 115);
+		button1.setLocation(20, 210);
 		maincontainer.add(button1);
 		button1.addActionListener(this);
 
@@ -120,7 +162,7 @@ public class myWindow extends JFrame implements ActionListener {
 		button2.setBackground(Color.WHITE);
 		button2.setFont(myFont);
 		button2.setSize(265, 30);
-		button2.setLocation(20, 155);
+		button2.setLocation(20, 250);
 		maincontainer.add(button2);
 		button2.addActionListener(this);
 		
@@ -128,7 +170,7 @@ public class myWindow extends JFrame implements ActionListener {
 		
 		footer = new JPanel();
 		footer.setBackground(Color.decode("#99CCFF"));
-		footer.setBounds(20, 300, 300, 50);
+		footer.setBounds(20, 390, 300, 50);
 		footer.setBorder(BorderFactory.createEtchedBorder());
 		footer.setLayout(null);
 
@@ -157,7 +199,7 @@ public class myWindow extends JFrame implements ActionListener {
 		
 		copyright = new JLabel("Copyright © 2013, ZJRC Cixi Team, All Rights Reserved");
 		copyright.setFont(new Font("Times", Font.PLAIN, 10));
-		copyright.setBounds(40, 365, 300, 20);
+		copyright.setBounds(40, 450, 300, 20);
 		p.add(copyright);
 		
 	}
@@ -166,8 +208,10 @@ public class myWindow extends JFrame implements ActionListener {
 
 		// 当按下浏览按钮，打开一个文件选择，文本框显示文件路径
 		if (e.getSource() == button0) {
-			rate = ratefield.getText();
-			System.out.println(rate);
+			rateE = ratefield1.getText();
+			rateH = ratefield2.getText();
+			rateJ = ratefield3.getText();
+			System.out.println(rateJ);
 		} else if (e.getSource() == Select) {
 			int intRetVal = fc.showOpenDialog(this);
 			if (intRetVal == JFileChooser.APPROVE_OPTION) {
@@ -238,7 +282,7 @@ public class myWindow extends JFrame implements ActionListener {
 		}
 
 		myWindow frame = new myWindow();
-		frame.setSize(360, 430);
+		frame.setSize(360, 510);
 		frame.setLocation(500, 200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
