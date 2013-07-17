@@ -189,22 +189,31 @@ public class Step2 {
 	private String calculateDailySum(WritableSheet wsheet, int endRow, int startCol, int endCol) throws Exception {
 		BigInteger zero = new BigInteger("0");
 		BigInteger sum = zero;
+		int numTrans = 0;
+
 		for (int i = startCol; i < endCol + 1; i += 1) {
 			sum = zero;
+			numTrans = 0;
 			for (int j = 1; j < endRow; j += 1) {
 				Cell cell = wsheet.getCell(i, j);
 				String num = cell.getContents();
-				if (!num.equals("")) {
+				if (!(num.equals("")||num.equals("0"))) {
+					numTrans += 1;
 					sum = sum.add(new BigInteger(num));
 				}
 			}
 			writeLabelWithFormat(wsheet, endRow, i, sum.toString(), Colour.LIME);
+			writeNumber(wsheet, endRow + 1, i, numTrans);
 		}
+		writeLabel(wsheet, endRow + 1, startCol, "");
 		writeLabelWithFormat(wsheet, endRow, 0, "合计", Colour.CORAL);
+		writeLabelWithFormat(wsheet, endRow + 1, 0, "笔数", Colour.CORAL);
 		
 		//padding
-		for (int i = 1; i < startCol; i += 1)
+		for (int i = 1; i < startCol; i += 1) {
 			writeLabelWithFormat(wsheet, endRow, i, " ", Colour.CORAL);
+			writeLabelWithFormat(wsheet, endRow + 1, i, " ", Colour.CORAL);
+		}
 		return sum.toString();
 	}
 	
@@ -273,8 +282,8 @@ public class Step2 {
 				WritableSheet wsheet = copy.getSheet(0);
 				
 				endCol = sheet.getColumns();
-				//exclude the last row(daily sums)
-				endRow = sheet.getRows() - 1; 
+				//exclude the last tow rows(daily sums & num of transactions)
+				endRow = sheet.getRows() - 2; 
 				
 				Hashtable<String, Integer> companies = new Hashtable<String, Integer>();
 				for (int i = 1; i < endRow; i += 1) {
@@ -338,7 +347,7 @@ public class Step2 {
 		for (String br : branches) {
 			temp = Workbook.getWorkbook(new File("data/" + br + ".xls"));
 			Sheet sheet = temp.getSheet(0);
-			int br_endRow = sheet.getRows() - 1;
+			int br_endRow = sheet.getRows() - 2;
 			
 			if (firstenter == true) {
 				//write titles
