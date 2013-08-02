@@ -179,8 +179,12 @@ public class Step2 extends XlsProcesser {
 			writeLabelWithFormat(wsheet, endRow, i, sum.toString(), Colour.LIME);
 			writeNumber(wsheet, endRow + 1, i, numTrans);
 		}
+<<<<<<< HEAD:src/FirstBlood/Step2.java
 		//System.out.println(calculateSum(wsheet, startCol, endCol));
 		writeLabel(wsheet, endRow + 1, startCol, calculateSumPro(wsheet, endRow + 1, startCol + 1, endCol));
+=======
+		writeLabel(wsheet, endRow + 1, startCol, "");
+>>>>>>> d5660dccc92597cee249146cce78275fd6f6dd2b:PROJECT_FIRST/src/FirstBlood/Step2.java
 		writeLabelWithFormat(wsheet, endRow, 0, "合计", Colour.CORAL);
 		writeLabelWithFormat(wsheet, endRow + 1, 0, "笔数", Colour.CORAL);
 		
