@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.*;
@@ -12,7 +13,7 @@ import java.util.*;
 public class readTxtFile {
      public static FirstClass first[] = new FirstClass[400]; 	
      
-     public static long JudgeCurr(String curr, long amount){
+     public static long JudgeCurr(String curr, double amount){
         float rate_temp = 0;
         float rate_Europe = Float.parseFloat(myWindow.rateE);
         float rate_HK = Float.parseFloat(myWindow.rateH);
@@ -26,7 +27,11 @@ public class readTxtFile {
         }else if(curr.equals("27")){
             rate_temp = rate_Jap; 
         }
-        return (long)(amount * rate_temp);
+        double mm = amount * rate_temp/100.0;
+        BigDecimal b = new BigDecimal(mm);
+        mm = b.setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue();
+        long xymm = (long)mm;
+        return xymm;
     }
      
      public static void read(String filePath, String dirPath, String in[]){ 
@@ -37,7 +42,7 @@ public class readTxtFile {
          }
     	int num = 0;
         try {
-        	long amount = 0;
+        	double amount = 0;
             File file=new File(filePath);
             if(file.isFile() && file.exists()){
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), Charset.forName("GBK")));
@@ -62,7 +67,7 @@ public class readTxtFile {
                                 + "(\\d+\\s)"
                                 + "\\d+\\s+"
                                 + "((\\S+(\\s+\\S+)*)\\s+)"
-                                + "(\\d+)\\d{2}";//amount-12
+                                + "(\\d+)";//amount-12
                     
                     String inentry = "^(\\d+\\s+)"
                                 + "(\\d+\\s+){2}"
@@ -73,7 +78,7 @@ public class readTxtFile {
                                 + "(\\d+\\s+)"
                                 + "\\d+\\s+"
                                 + "((\\S+(\\s+\\S+)*)\\s+)"
-                                + "(\\d+)\\d{2}"; //amount-11
+                                + "(\\d+)"; //amount-11
                     
                    
                     Pattern outp = Pattern.compile(outstart, Pattern.CASE_INSENSITIVE);
@@ -224,7 +229,7 @@ public class readTxtFile {
       
     public static void Read(String txtPath, String dirPath, String in[]) {
     	
-	readTxtFile.read(txtPath,dirPath, in);    
+	    readTxtFile.read(txtPath,dirPath, in);    
         Step1Phase2.xiaoyu(first, dirPath);
     }
 

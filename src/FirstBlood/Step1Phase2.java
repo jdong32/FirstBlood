@@ -64,7 +64,7 @@ public class Step1Phase2 {
 		return retval;
 	}
 	
-	private void process(FirstClass[] inputs, String path) {
+	private void process(FirstClass[] inputs, FirstClass[] inputs1, String path) {
 		File destFile = new File(path + "初步文件.xls");
 		try {
 				if (!destFile.exists()) {
@@ -72,7 +72,7 @@ public class Step1Phase2 {
 			}
 			
 			WritableWorkbook wwb = Workbook.createWorkbook(destFile);
-			WritableSheet wsheet = wwb.createSheet("output", 0);
+			WritableSheet wsheet = wwb.createSheet("汇入表", 0);
 
 			genDictionary("data/dictsrc.xls");
 			for (FirstClass fc : inputs) {
@@ -85,6 +85,17 @@ public class Step1Phase2 {
 				}
 			}
 			
+			row_cnt = 0;
+			WritableSheet wsheet1 = wwb.createSheet("汇出表", 1);
+			for (FirstClass fc : inputs1) {
+				if (fc.name1 == null || fc.money ==0) {
+					continue;
+				} else {
+					//System.out.println(fc.name1 + " : " + lookupDictionary(fc.name2));
+					appendEntry(wsheet1, fc, lookupDictionary(fc.name2));
+					
+				}
+			}
 			wwb.write();
 			wwb.close();
 			
@@ -96,7 +107,7 @@ public class Step1Phase2 {
 	
 	public static void xiaoyu(FirstClass[] inputs, String path) {
 		Step1Phase2 step = new Step1Phase2();
-		step.process(inputs, path);
+		step.process(inputs, inputs, path);
 	}
 
 }
