@@ -219,9 +219,9 @@ public class myWindow extends JFrame implements ActionListener {
 			if (txtFilePath != null) {
 				readTxtFile.Read(txtFilePath, txtDirPath, inforin);
 				
-				File destFile = new File(txtDirPath + "汇入初步文件.xls");
-				File destFile2 = new File(txtDirPath + "汇出初步文件.xls");
-				if (destFile.exists()&&destFile2.exists()) {
+				File destFile = new File(txtDirPath + "初步文件.xls");
+//				File destFile2 = new File(txtDirPath + "汇出初步文件.xls");
+				if (destFile.exists()) {
 					JOptionPane.showMessageDialog(null, "初步Excel文件已生成", "提示",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -234,11 +234,11 @@ public class myWindow extends JFrame implements ActionListener {
 		else if (e.getSource() == button2) {
 			// 第二步
 			// 当按下按钮，生成一个最终的Excel文件
-			if (txtDirPath != null && (new File(txtDirPath + "汇入初步文件.xls").exists())
-					&&(new File(txtDirPath + "汇出初步文件.xls").exists())) {
+			if (txtDirPath != null && (new File(txtDirPath + "初步文件.xls").exists())
+					) {
 				String stemp = fc.getSelectedFile().getName();
 				String date = stemp.replaceAll("\\D", "");
-				String srcPath1 = txtDirPath + "汇入初步文件.xls";
+				String srcPath1 = txtDirPath + "初步文件.xls";
 				String srcPath2 = txtDirPath + "汇出初步文件.xls";
 				String destPath = txtDirPath + "同户名统计.xls";
 				Step2.zuzhang(srcPath1, destPath, date);//未修改

@@ -14,13 +14,13 @@ public class Step1Phase2 {
 		WritableCell wc = (WritableCell) label;
 		wsheet.addCell(wc);
 	}
-	
+
 	private void writeNumber(WritableSheet wsheet, int row, int col, long num) throws Exception  {
 		jxl.write.Number number = new jxl.write.Number(col, row, num);
 		WritableCell wc = (WritableCell) number;
 		wsheet.addCell(wc);
 	}
-	
+
 	private void appendEntry(WritableSheet wsheet, FirstClass fc, String branch) throws Exception {
 		System.out.println(fc.name1 + fc.name2 + fc.money);
 		writeLabel(wsheet, row_cnt, 0, branch);
@@ -51,7 +51,7 @@ public class Step1Phase2 {
 				branchDict.put(c[1].getContents(), c[0].getContents());
 			}
 		}
-		
+
 		/*for (String str : br) {
 			osw.write(str + "\r\n");
 		}
@@ -63,16 +63,16 @@ public class Step1Phase2 {
 		if (branchDict.containsKey(name)) retval = branchDict.get(name);
 		return retval;
 	}
-	
-	private void process(FirstClass[] inputs, FirstClass[] inputs1, String path) {
+
+	private void process(FirstClass[] inputs, String path) {
 		File destFile = new File(path + "初步文件.xls");
 		try {
 				if (!destFile.exists()) {
 				destFile.createNewFile();
 			}
-			
+
 			WritableWorkbook wwb = Workbook.createWorkbook(destFile);
-			WritableSheet wsheet = wwb.createSheet("汇入表", 0);
+			WritableSheet wsheet = wwb.createSheet("output", 0);
 
 			genDictionary("data/dictsrc.xls");
 			for (FirstClass fc : inputs) {
@@ -81,33 +81,22 @@ public class Step1Phase2 {
 				} else {
 					//System.out.println(fc.name1 + " : " + lookupDictionary(fc.name2));
 					appendEntry(wsheet, fc, lookupDictionary(fc.name2));
-					
+
 				}
 			}
-			
-			row_cnt = 0;
-			WritableSheet wsheet1 = wwb.createSheet("汇出表", 1);
-			for (FirstClass fc : inputs1) {
-				if (fc.name1 == null || fc.money ==0) {
-					continue;
-				} else {
-					//System.out.println(fc.name1 + " : " + lookupDictionary(fc.name2));
-					appendEntry(wsheet1, fc, lookupDictionary(fc.name2));
-					
-				}
-			}
+
 			wwb.write();
 			wwb.close();
-			
+
 		} catch (Exception e) {
 			System.out.println("222");
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	public static void xiaoyu(FirstClass[] inputs, String path) {
 		Step1Phase2 step = new Step1Phase2();
-		step.process(inputs, inputs, path);
+		step.process(inputs, path);
 	}
 
 }
